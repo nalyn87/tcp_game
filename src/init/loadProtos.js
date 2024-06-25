@@ -45,3 +45,7 @@ export const loadProtos = async () => {
     console.error('Protobuf 파일 로드 중 오류가 방생했습니다: ', err);
   }
 };
+
+export const getProtoMessages = () => {
+  return { ...protoMessages }; // 얕은 복사
+};

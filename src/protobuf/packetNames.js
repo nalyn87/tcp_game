@@ -1,6 +1,6 @@
 export const packetNames = {
   common: {
-    Pakcet: 'common.Packet',
+    Packet: 'common.Packet',
   },
   response: {
     Response: 'response.Response',
