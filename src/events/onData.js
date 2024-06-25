@@ -5,6 +5,7 @@ import { getUserById } from '../sessions/user.session.js';
 import { ErrorCodes } from '../utils/error/errorCodes.js';
 import { handlerError } from '../utils/error/errorHandler.js';
 import { packetParser } from '../utils/parser/packetParser.js';
+import CustomError from '../utils/error/customError.js'
 
 export const onData = (socket) => async (data) => {
   socket.buffer = Buffer.concat([socket.buffer, data]);
@@ -27,14 +28,14 @@ export const onData = (socket) => async (data) => {
             break;
           case PACKET_TYPE.NORMAL:
             const { handlerId, userId, payload, sequence } = packetParser(packet);
-  
+
             const user = getUserById(userId);
             if (user && user.sequence !== sequence) {
-              throw new CustomError(ErrorCodes.INVALID_SEQUENCE, '잘못된 호출값입니다')
+              throw new CustomError(ErrorCodes.INVALID_SEQUENCE, '잘못된 호출값입니다');
             }
-  
-            const handler = getHandlerById(handlerId);
-  
+
+            const handler = getHandlerById(handlerId).handler;
+
             await handler({ socket, userId, payload });
         }
       } catch (err) {
