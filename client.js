@@ -149,3 +149,7 @@ client.on('close', () => {
 client.on('error', (err) => {
   console.error('Client error:', err);
 });
+
+client.on('SIGINT', () => {
+  client.end(() => process.exit(0))
+})
