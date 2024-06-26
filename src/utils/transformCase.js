@@ -1,5 +1,4 @@
-import pkg from 'lodash/camelCase.js';
-const {camelCase} = pkg;
+import camelCase from 'lodash/camelCase.js';
 
 export const toCamelCase = (obj) => {
   if (Array.isArray(obj)) {
